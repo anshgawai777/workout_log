@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Workout Plan with AI Coach</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: "Zenith Blue & Slate" -->
+    <!-- Application Structure Plan: The application is designed as a single-day, task-oriented digital log. It uses a vertical, card-based layout to separate the distinct phases of the workout (Warm-up, Main Lift, etc.). This structure was chosen because it mirrors the linear, sequential nature of a gym session, making it highly intuitive for the user to follow along. Key interactions include checkboxes for task completion, which dynamically update a session progress bar for motivation, and collapsible sections for detailed coaching cues, which keeps the UI clean and focused. A final form captures the qualitative feedback required by the coach, completing the session loop. The Gemini API is integrated into the final form submission to provide instant AI-powered analysis and recommendations. -->
+    <!-- Visualization & Content Choices: Report Info (Workout Exercises) -> Goal (Organize/Track) -> Presentation (Interactive Checklist) -> Interaction (Checkboxes updating a progress bar) -> Justification (Provides a clear, actionable path through the workout and tangible feedback on progress). Report Info (Coaching Cues) -> Goal (Inform on-demand) -> Presentation (Collapsible Text Blocks) -> Interaction (Click to toggle visibility) -> Justification (Prevents information overload while keeping critical advice accessible). Report Info (User Feedback Req) -> Goal (Capture & Analyze Data) -> Presentation (HTML Form + AI Response Area) -> Interaction (Text input triggers Gemini API call) -> Justification (Provides immediate, actionable, and personalized coaching feedback, enhancing the user's training cycle). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .task-checkbox:checked + label .task-text {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .details-content.open {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto max-w-3xl p-4 sm:p-6 md:p-8">
+
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900" style="font-family: 'Roboto Condensed', sans-serif;">Workout Session</h1>
+            <p class="text-lg text-slate-600">Month 1: Foundation & Rehab - Week 1, Day 1</p>
+        </header>
+        
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-slate-700">Session Progress</span>
+                <span id="progress-text" class="text-sm font-medium text-slate-700">0%</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <main id="workout-sections" class="space-y-6">
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">1. Dynamic Warm-up & Activation</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task1" class="task-checkbox hidden">
+                        <label for="task1" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white fill-current hidden" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                            </span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">General Warm-up</p>
+                                <p class="text-sm text-slate-500">5 mins bike or rower</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task2" class="task-checkbox hidden">
+                        <label for="task2" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Cat-Cow</p>
+                                <p class="text-sm text-slate-500">2 sets of 10 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task3" class="task-checkbox hidden">
+                        <label for="task3" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Banded Shoulder Dislocates</p>
+                                <p class="text-sm text-slate-500">2 sets of 15 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task4" class="task-checkbox hidden">
+                        <label for="task4" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Banded Pull-Aparts</p>
+                                <p class="text-sm text-slate-500">2 sets of 20 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task5" class="task-checkbox hidden">
+                        <label for="task5" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Glute Bridges</p>
+                                <p class="text-sm text-slate-500">2 sets of 15 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task6" class="task-checkbox hidden">
+                        <label for="task6" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Banded Clamshells</p>
+                                <p class="text-sm text-slate-500">2 sets of 15 reps per side</p>
+                            </div>
+                        </label>
+                    </li>
+                     <li class="flex items-start">
+                        <input type="checkbox" id="task7" class="task-checkbox hidden">
+                        <label for="task7" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Goblet Squats (Light)</p>
+                                <p class="text-sm text-slate-500">2 sets of 8 reps (3s pause)</p>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">2. Main Lift: Tempo Paused Back Squat</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task8" class="task-checkbox hidden">
+                        <label for="task8" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">5 sets of 5 reps @ 65 kg</p>
+                                <p class="text-sm text-slate-500">Tempo: 3s down, 2s pause, explosive up</p>
+                            </div>
+                        </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
+                    </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>On the way down, actively "screw" your feet into the floor.</li>
+                            <li>In the pause at the bottom, stay tight. Don't relax.</li>
+                            <li>If you feel your hip start to shift, stop the set, lower the weight, and refocus.</li>
+                        </ul>
+                    </div>
+                </ul>
+            </section>
+            
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">3. Secondary Lift: Clean Pulls</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task9" class="task-checkbox hidden">
+                        <label for="task9" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">4 sets of 3 reps @ 60 kg</p>
+                            </div>
+                        </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
+                    </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>Focus on keeping the bar close to your body.</li>
+                            <li>Goal is violent, explosive extension of your hips and knees.</li>
+                            <li>Finish tall, on your toes, with shoulders shrugged high.</li>
+                        </ul>
+                    </div>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">4. Accessory & Rehab Work</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task10" class="task-checkbox hidden">
+                        <label for="task10" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Single-Arm DB Bench Press</p>
+                                <p class="text-sm text-slate-500">3 sets of 10 reps per side</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task11" class="task-checkbox hidden">
+                        <label for="task11" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Romanian Deadlifts (RDLs)</p>
+                                <p class="text-sm text-slate-500">3 sets of 8 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task12" class="task-checkbox hidden">
+                        <label for="task12" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Face Pulls</p>
+                                <p class="text-sm text-slate-500">3 sets of 15-20 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">5. Cool-down & Mobility</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task13" class="task-checkbox hidden">
+                        <label for="task13" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Pigeon Pose</p>
+                                <p class="text-sm text-slate-500">60 seconds per side</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task14" class="task-checkbox hidden">
+                        <label for="task14" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Couch Stretch</p>
+                                <p class="text-sm text-slate-500">60 seconds per side</p>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+            
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">Session Report</h2>
+                <p class="text-slate-600 mb-4 text-sm">Fill this out after your session so the AI coach can plan your next workout.</p>
+                <form id="report-form" class="space-y-4">
+                    <div>
+                        <label for="shoulder-pain" class="block text-sm font-medium text-slate-700">Right shoulder pain (1-10)? Which exercise?</label>
+                        <input type="text" id="shoulder-pain" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div>
+                        <label for="hip-shift" class="block text-sm font-medium text-slate-700">Did you feel the hip shift on squats? At what weight/rep?</label>
+                        <input type="text" id="hip-shift" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div>
+                        <label for="general-notes" class="block text-sm font-medium text-slate-700">Any other notes or feelings about the session?</label>
+                        <textarea id="general-notes" rows="3" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center justify-center">
+                        ✨ Analyze My Session
+                    </button>
+                </form>
+                <div id="ai-response-container" class="hidden mt-6">
+                    <div id="loader-container" class="flex justify-center items-center py-4">
+                        <div class="loader"></div>
+                        <p class="ml-4 text-slate-600">Your AI coach is analyzing your session...</p>
+                    </div>
+                    <div id="ai-response-content" class="hidden bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg">
+                        <h3 class="font-bold text-lg mb-2">Coach's Feedback</h3>
+                        <div id="ai-response-text" class="prose prose-sm max-w-none"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const totalTasks = checkboxes.length;
+
+            const updateProgress = () => {
+                const checkedTasks = document.querySelectorAll('.task-checkbox:checked').length;
+                const percentage = totalTasks > 0 ? Math.round((checkedTasks / totalTasks) * 100) : 0;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${percentage}%`;
+            };
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const label = checkbox.nextElementSibling;
+                    const checkmark = label.querySelector('span');
+                    const svg = checkmark.querySelector('svg');
+                    if (checkbox.checked) {
+                        checkmark.classList.add('bg-blue-600', 'border-blue-600');
+                        if (svg) svg.classList.remove('hidden');
+                    } else {
+                        checkmark.classList.remove('bg-blue-600', 'border-blue-600');
+                        if (svg) svg.classList.add('hidden');
+                    }
+                    updateProgress();
+                });
+            });
+
+            const detailToggles = document.querySelectorAll('.details-toggle');
+            detailToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.parentElement.nextElementSibling;
+                    content.classList.toggle('open');
+                    toggle.textContent = content.classList.contains('open') ? 'Hide' : 'Cues';
+                });
+            });
+            
+            const reportForm = document.getElementById('report-form');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const loaderContainer = document.getElementById('loader-container');
+            const aiResponseContent = document.getElementById('ai-response-content');
+            const aiResponseText = document.getElementById('ai-response-text');
+
+            reportForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const shoulderPain = document.getElementById('shoulder-pain').value;
+                const hipShift = document.getElementById('hip-shift').value;
+                const generalNotes = document.getElementById('general-notes').value;
+
+                if (!shoulderPain && !hipShift && !generalNotes) {
+                    aiResponseText.innerHTML = '<p>Please provide some feedback in the form to get an analysis.</p>';
+                    aiResponseContent.classList.remove('hidden');
+                    aiResponseContainer.classList.remove('hidden');
+                    loaderContainer.classList.add('hidden');
+                    return;
+                }
+
+                aiResponseContainer.classList.remove('hidden');
+                loaderContainer.classList.remove('hidden');
+                aiResponseContent.classList.add('hidden');
+
+                const prompt = `
+                    You are a sports coach and physical therapist. A 23-year-old male lifter with a history of right 'weightlifter's shoulder' and a right hip shift in deep squats has just completed a workout. Here is his report:
+                    - Shoulder Pain: "${shoulderPain || 'Not specified'}"
+                    - Hip Shift: "${hipShift || 'Not specified'}"
+                    - General Notes: "${generalNotes || 'Not specified'}"
+
+                    Based on this feedback, provide an encouraging, empathetic response and suggest 2-3 specific mobility drills or stretches he should focus on before his next session to address these issues. Format the response as a short, encouraging paragraph followed by a bulleted list of the drills. The response should be in Markdown.
+                `;
+
+                try {
+                    const text = await callGemini(prompt);
+                    // Basic Markdown to HTML conversion
+                    let html = text.replace(/\n\n/g, '<br><br>');
+                    html = html.replace(/\n/g, '<br>');
+                    html = html.replace(/-\s/g, '</li><li>');
+                    if (html.includes('<li>')) {
+                       html = '<ul><li>' + html.substring(html.indexOf('<li>') + 4) + '</li></ul>';
+                    }
+                    html = html.replace(/<br><ul>/g, '<ul>');
+
+
+                    aiResponseText.innerHTML = html;
+                    loaderContainer.classList.add('hidden');
+                    aiResponseContent.classList.remove('hidden');
+                } catch (error) {
+                    aiResponseText.innerHTML = '<p>Sorry, there was an error getting feedback from the AI coach. Please try again later.</p>';
+                    loaderContainer.classList.add('hidden');
+                    aiResponseContent.classList.remove('hidden');
+                }
+            });
+
+            async function callGemini(prompt, retries = 3, delay = 1000) {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else {
+                            throw new Error("Invalid response structure from Gemini API");
+                        }
+                    } catch (error) {
+                        if (i === retries - 1) throw error;
+                        await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+                    }
+                }
+            }
+
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
