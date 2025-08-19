@@ -24,7 +24,7 @@
         }
         .details-content.open {
             max-height: 500px;
-            transition: max-height 0.5s ease-in;
+            transition: max-height: 0.5s ease-in;
         }
         .loader {
             border: 4px solid #f3f3f3;
@@ -49,7 +49,7 @@
 
         <header class="mb-8">
             <h1 class="text-3xl font-bold text-slate-900" style="font-family: 'Roboto Condensed', sans-serif;">Workout Session</h1>
-            <p class="text-lg text-slate-600">Month 1: Foundation & Rehab - Week 1, Day 1</p>
+            <p class="text-lg text-slate-600">Month 1: Foundation & Rehab - Week 1, Day 2</p>
         </header>
         
         <div class="mb-8">
@@ -66,6 +66,7 @@
 
             <section class="bg-white p-6 rounded-xl shadow-sm">
                 <h2 class="text-xl font-bold mb-4">1. Dynamic Warm-up & Activation</h2>
+                <p class="text-sm text-slate-600 mb-4">Focus on slow, controlled movements. We are waking up muscles, not fatiguing them.</p>
                 <ul class="space-y-4">
                     <li class="flex items-start">
                         <input type="checkbox" id="task1" class="task-checkbox hidden">
@@ -84,38 +85,69 @@
                         <label for="task2" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Cat-Cow</p>
+                                <p class="task-text font-medium">Scapular Wall Slides</p>
                                 <p class="text-sm text-slate-500">2 sets of 10 reps</p>
                             </div>
                         </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
                     </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>Stand with your back against a wall. Arms in a "goalpost" position.</li>
+                            <li>Slowly slide your arms up the wall, keeping your forearms and wrists in contact.</li>
+                            <li>Focus on using your back muscles. No front delt pain.</li>
+                        </ul>
+                    </div>
                     <li class="flex items-start">
                         <input type="checkbox" id="task3" class="task-checkbox hidden">
                         <label for="task3" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Banded Shoulder Dislocates</p>
-                                <p class="text-sm text-slate-500">2 sets of 15 reps</p>
+                                <p class="task-text font-medium">Side-Lying Hip Abduction (Leg Lifts)</p>
+                                <p class="text-sm text-slate-500">2 sets of 15 reps per side</p>
                             </div>
                         </label>
+                         <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
                     </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>Lie on your side, legs straight.</li>
+                            <li>Slowly raise your top leg without rocking your torso.</li>
+                            <li>Focus on feeling the muscle on the side of your hip contract. This isolates the glute medius.</li>
+                        </ul>
+                    </div>
                     <li class="flex items-start">
                         <input type="checkbox" id="task4" class="task-checkbox hidden">
                         <label for="task4" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Banded Pull-Aparts</p>
-                                <p class="text-sm text-slate-500">2 sets of 20 reps</p>
+                                <p class="task-text font-medium">Bodyweight Squats with Band</p>
+                                <p class="text-sm text-slate-500">2 sets of 10 reps</p>
                             </div>
                         </label>
+                         <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
                     </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>Place a mini-band just above your knees.</li>
+                            <li>Focus on actively pushing your knees out against the band throughout the entire squat.</li>
+                            <li>This forces your glutes to activate.</li>
+                        </ul>
+                    </div>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">2. Main Lift: Snatch (Technique Focus)</h2>
+                <p class="text-sm text-slate-600 mb-4">We are doing this first while you are fresh. The weight is light. The goal is perfect, crisp movement.</p>
+                <ul class="space-y-4">
                     <li class="flex items-start">
                         <input type="checkbox" id="task5" class="task-checkbox hidden">
                         <label for="task5" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Glute Bridges</p>
-                                <p class="text-sm text-slate-500">2 sets of 15 reps</p>
+                                <p class="task-text font-medium">Snatch High Pulls</p>
+                                <p class="text-sm text-slate-500">3 sets of 3 reps @ 40 kg</p>
                             </div>
                         </label>
                     </li>
@@ -124,66 +156,41 @@
                         <label for="task6" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Banded Clamshells</p>
-                                <p class="text-sm text-slate-500">2 sets of 15 reps per side</p>
-                            </div>
-                        </label>
-                    </li>
-                     <li class="flex items-start">
-                        <input type="checkbox" id="task7" class="task-checkbox hidden">
-                        <label for="task7" class="flex items-center cursor-pointer w-full">
-                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
-                            <div class="flex-grow">
-                                <p class="task-text font-medium">Goblet Squats (Light)</p>
-                                <p class="text-sm text-slate-500">2 sets of 8 reps (3s pause)</p>
-                            </div>
-                        </label>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="bg-white p-6 rounded-xl shadow-sm">
-                <h2 class="text-xl font-bold mb-4">2. Main Lift: Tempo Paused Back Squat</h2>
-                <ul class="space-y-4">
-                    <li class="flex items-start">
-                        <input type="checkbox" id="task8" class="task-checkbox hidden">
-                        <label for="task8" class="flex items-center cursor-pointer w-full">
-                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
-                            <div class="flex-grow">
-                                <p class="task-text font-medium">5 sets of 5 reps @ 65 kg</p>
-                                <p class="text-sm text-slate-500">Tempo: 3s down, 2s pause, explosive up</p>
+                                <p class="task-text font-medium">Power Snatch</p>
+                                <p class="text-sm text-slate-500">5 sets of 2 reps @ 40 kg</p>
                             </div>
                         </label>
                         <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
                     </li>
                     <div class="details-content pl-10 pt-2">
                         <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
-                            <li>On the way down, actively "screw" your feet into the floor.</li>
-                            <li>In the pause at the bottom, stay tight. Don't relax.</li>
-                            <li>If you feel your hip start to shift, stop the set, lower the weight, and refocus.</li>
+                            <li>Focus on speed and a strong, stable catch position.</li>
+                            <li>How does the right shoulder feel receiving the bar overhead?</li>
                         </ul>
                     </div>
                 </ul>
             </section>
             
             <section class="bg-white p-6 rounded-xl shadow-sm">
-                <h2 class="text-xl font-bold mb-4">3. Secondary Lift: Clean Pulls</h2>
+                <h2 class="text-xl font-bold mb-4">3. Secondary Lift: Bench Press</h2>
+                 <p class="text-sm text-slate-600 mb-4">We are using a controlled tempo to build stability in the shoulder.</p>
                 <ul class="space-y-4">
                     <li class="flex items-start">
-                        <input type="checkbox" id="task9" class="task-checkbox hidden">
-                        <label for="task9" class="flex items-center cursor-pointer w-full">
+                        <input type="checkbox" id="task7" class="task-checkbox hidden">
+                        <label for="task7" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">4 sets of 3 reps @ 60 kg</p>
+                                <p class="task-text font-medium">Tempo Bench Press</p>
+                                <p class="text-sm text-slate-500">4 sets of 6 reps @ 65 kg</p>
                             </div>
                         </label>
                         <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
                     </li>
                     <div class="details-content pl-10 pt-2">
                         <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
-                            <li>Focus on keeping the bar close to your body.</li>
-                            <li>Goal is violent, explosive extension of your hips and knees.</li>
-                            <li>Finish tall, on your toes, with shoulders shrugged high.</li>
+                            <li>Tempo: 3 seconds down, 1 second pause on chest, explosive up.</li>
+                            <li>Keep your shoulder blades pulled back and down throughout the entire lift.</li>
+                            <li>If you feel any sharp pain, stop the set.</li>
                         </ul>
                     </div>
                 </ul>
@@ -193,32 +200,30 @@
                 <h2 class="text-xl font-bold mb-4">4. Accessory & Rehab Work</h2>
                 <ul class="space-y-4">
                     <li class="flex items-start">
-                        <input type="checkbox" id="task10" class="task-checkbox hidden">
-                        <label for="task10" class="flex items-center cursor-pointer w-full">
+                        <input type="checkbox" id="task8" class="task-checkbox hidden">
+                        <label for="task8" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Single-Arm DB Bench Press</p>
+                                <p class="task-text font-medium">Bulgarian Split Squats</p>
+                                <p class="text-sm text-slate-500">3 sets of 8 reps per side (Bodyweight only)</p>
+                            </div>
+                        </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
+                    </li>
+                     <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>This is our main weapon against the hip shift.</li>
+                            <li>Focus on keeping your front knee tracking over your foot. Don't let it cave inwards.</li>
+                            <li>Is the right side significantly weaker or less stable than the left?</li>
+                        </ul>
+                    </div>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task9" class="task-checkbox hidden">
+                        <label for="task9" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Dumbbell Rows</p>
                                 <p class="text-sm text-slate-500">3 sets of 10 reps per side</p>
-                            </div>
-                        </label>
-                    </li>
-                    <li class="flex items-start">
-                        <input type="checkbox" id="task11" class="task-checkbox hidden">
-                        <label for="task11" class="flex items-center cursor-pointer w-full">
-                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
-                            <div class="flex-grow">
-                                <p class="task-text font-medium">Romanian Deadlifts (RDLs)</p>
-                                <p class="text-sm text-slate-500">3 sets of 8 reps</p>
-                            </div>
-                        </label>
-                    </li>
-                    <li class="flex items-start">
-                        <input type="checkbox" id="task12" class="task-checkbox hidden">
-                        <label for="task12" class="flex items-center cursor-pointer w-full">
-                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
-                            <div class="flex-grow">
-                                <p class="task-text font-medium">Face Pulls</p>
-                                <p class="text-sm text-slate-500">3 sets of 15-20 reps</p>
                             </div>
                         </label>
                     </li>
@@ -229,8 +234,8 @@
                 <h2 class="text-xl font-bold mb-4">5. Cool-down & Mobility</h2>
                 <ul class="space-y-4">
                     <li class="flex items-start">
-                        <input type="checkbox" id="task13" class="task-checkbox hidden">
-                        <label for="task13" class="flex items-center cursor-pointer w-full">
+                        <input type="checkbox" id="task10" class="task-checkbox hidden">
+                        <label for="task10" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
                                 <p class="task-text font-medium">Pigeon Pose</p>
@@ -239,11 +244,11 @@
                         </label>
                     </li>
                     <li class="flex items-start">
-                        <input type="checkbox" id="task14" class="task-checkbox hidden">
-                        <label for="task14" class="flex items-center cursor-pointer w-full">
+                        <input type="checkbox" id="task11" class="task-checkbox hidden">
+                        <label for="task11" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
                             <div class="flex-grow">
-                                <p class="task-text font-medium">Couch Stretch</p>
+                                <p class="task-text font-medium">Doorway Chest Stretch</p>
                                 <p class="text-sm text-slate-500">60 seconds per side</p>
                             </div>
                         </label>
@@ -256,11 +261,11 @@
                 <p class="text-slate-600 mb-4 text-sm">Fill this out after your session so the AI coach can plan your next workout.</p>
                 <form id="report-form" class="space-y-4">
                     <div>
-                        <label for="shoulder-pain" class="block text-sm font-medium text-slate-700">Right shoulder pain (1-10)? Which exercise?</label>
+                        <label for="shoulder-pain" class="block text-sm font-medium text-slate-700">Any shoulder pain today? During which exercise?</label>
                         <input type="text" id="shoulder-pain" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
                     </div>
                     <div>
-                        <label for="hip-shift" class="block text-sm font-medium text-slate-700">Did you feel the hip shift on squats? At what weight/rep?</label>
+                        <label for="hip-shift" class="block text-sm font-medium text-slate-700">How did the Bulgarian Split Squats feel? Compare right vs. left side stability.</label>
                         <input type="text" id="hip-shift" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
                     </div>
                     <div>
@@ -351,9 +356,9 @@
                 aiResponseContent.classList.add('hidden');
 
                 const prompt = `
-                    You are a sports coach and physical therapist. A 23-year-old male lifter with a history of right 'weightlifter's shoulder' and a right hip shift in deep squats has just completed a workout. Here is his report:
+                    You are an expert sports coach and physical therapist. A 23-year-old male lifter with a history of right 'weightlifter's shoulder' and a right hip shift in deep squats has just completed his second workout. Here is his report:
                     - Shoulder Pain: "${shoulderPain || 'Not specified'}"
-                    - Hip Shift: "${hipShift || 'Not specified'}"
+                    - Hip/Stability Feedback (from Bulgarian Split Squats): "${hipShift || 'Not specified'}"
                     - General Notes: "${generalNotes || 'Not specified'}"
 
                     Based on this feedback, provide an encouraging, empathetic response and suggest 2-3 specific mobility drills or stretches he should focus on before his next session to address these issues. Format the response as a short, encouraging paragraph followed by a bulleted list of the drills. The response should be in Markdown.
@@ -362,9 +367,9 @@
                 try {
                     const text = await callGemini(prompt);
                     // Basic Markdown to HTML conversion
-                    let html = text.replace(/\n\n/g, '<br><br>');
-                    html = html.replace(/\n/g, '<br>');
-                    html = html.replace(/-\s/g, '</li><li>');
+                    let html = text.replace(/\\n\\n/g, '<br><br>');
+                    html = html.replace(/\\n/g, '<br>');
+                    html = html.replace(/-\\s/g, '</li><li>');
                     if (html.includes('<li>')) {
                        html = '<ul><li>' + html.substring(html.indexOf('<li>') + 4) + '</li></ul>';
                     }
@@ -421,4 +426,3 @@
     </script>
 </body>
 </html>
-
