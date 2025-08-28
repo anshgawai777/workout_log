@@ -49,7 +49,7 @@
 
         <header class="mb-8">
             <h1 class="text-3xl font-bold text-slate-900" style="font-family: 'Roboto Condensed', sans-serif;">Workout Session</h1>
-            <p class="text-lg text-slate-600">Month 1: Foundation & Rehab - Week 1, Day 3</p>
+            <p class="text-lg text-slate-600">Month 1: Foundation & Rehab - Week 1, Day 4 (Active Recovery)</p>
         </header>
         
         <div class="mb-8">
@@ -65,13 +65,264 @@
         <main id="workout-sections" class="space-y-6">
 
             <section class="bg-white p-6 rounded-xl shadow-sm">
-                <h2 class="text-xl font-bold mb-4">1. Dynamic Warm-up & Activation</h2>
+                <h2 class="text-xl font-bold mb-4">1. Light Cardio & Blood Flow</h2>
+                <p class="text-sm text-slate-600 mb-4">The goal is to get warm and promote blood flow to sore muscles. Keep the intensity very low.</p>
                 <ul class="space-y-4">
                     <li class="flex items-start">
                         <input type="checkbox" id="task1" class="task-checkbox hidden">
                         <label for="task1" class="flex items-center cursor-pointer w-full">
                             <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center">
                                 <svg class="w-4 h-4 text-white fill-current hidden" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                            </span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Incline Treadmill Walk or Stationary Bike</p>
+                                <p class="text-sm text-slate-500">15-20 minutes</p>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">2. Targeted Mobility & Activation</h2>
+                <p class="text-sm text-slate-600 mb-4">These movements directly address the issues we've found: hip stability, shoulder health, and lockout strength.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task2" class="task-checkbox hidden">
+                        <label for="task2" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Cat-Cow</p>
+                                <p class="text-sm text-slate-500">2 sets of 10 reps</p>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task3" class="task-checkbox hidden">
+                        <label for="task3" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Banded Tricep Pushdowns</p>
+                                <p class="text-sm text-slate-500">2 sets of 20 reps (light band)</p>
+                            </div>
+                        </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
+                    </li>
+                    <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>This teaches a strong, aggressive elbow lockout.</li>
+                            <li>Focus on squeezing your triceps hard at the bottom of each rep.</li>
+                        </ul>
+                    </div>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task4" class="task-checkbox hidden">
+                        <label for="task4" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Couch Stretch</p>
+                                <p class="text-sm text-slate-500">90 seconds per side</p>
+                            </div>
+                        </label>
+                        <button class="details-toggle text-sm text-blue-600 font-semibold ml-4 flex-shrink-0">Cues</button>
+                    </li>
+                     <div class="details-content pl-10 pt-2">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                            <li>This will help open up your hip flexors, which can help with the hip pinch.</li>
+                            <li>Keep your core tight and squeeze the glute of the down leg.</li>
+                        </ul>
+                    </div>
+                    <li class="flex items-start">
+                        <input type="checkbox" id="task5" class="task-checkbox hidden">
+                        <label for="task5" class="flex items-center cursor-pointer w-full">
+                            <span class="w-6 h-6 border-2 border-slate-300 rounded-md mr-4 flex-shrink-0 flex items-center justify-center"></span>
+                            <div class="flex-grow">
+                                <p class="task-text font-medium">Doorway Chest Stretch</p>
+                                <p class="text-sm text-slate-500">60 seconds per side</p>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+            
+            <section class="bg-white p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold mb-4">Session Report</h2>
+                <p class="text-slate-600 mb-4 text-sm">Let me know how you feel after this recovery session.</p>
+                <form id="report-form" class="space-y-4">
+                    <div>
+                        <label for="general-notes" class="block text-sm font-medium text-slate-700">How are your legs and shoulder feeling now? Any other notes?</label>
+                        <textarea id="general-notes" rows="3" class="mt-1 block w-full bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center justify-center">
+                        ✨ Log Recovery Session
+                    </button>
+                </form>
+                <div id="ai-response-container" class="hidden mt-6">
+                    <div id="loader-container" class="flex justify-center items-center py-4">
+                        <div class="loader"></div>
+                        <p class="ml-4 text-slate-600">Your AI coach is analyzing your session...</p>
+                    </div>
+                    <div id="ai-response-content" class="hidden bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg">
+                        <h3 class="font-bold text-lg mb-2">Coach's Feedback</h3>
+                        <div id="ai-response-text" class="prose prose-sm max-w-none"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const totalTasks = checkboxes.length;
+            const storageKey = 'workoutProgress_M1W1D4';
+
+            const updateProgress = () => {
+                const checkedTasks = document.querySelectorAll('.task-checkbox:checked');
+                const checkedIds = Array.from(checkedTasks).map(cb => cb.id);
+                
+                const percentage = totalTasks > 0 ? Math.round((checkedTasks.length / totalTasks) * 100) : 0;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${percentage}%`;
+
+                localStorage.setItem(storageKey, JSON.stringify(checkedIds));
+            };
+            
+            const loadProgress = () => {
+                const savedProgress = JSON.parse(localStorage.getItem(storageKey)) || [];
+                savedProgress.forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            };
+
+            const setInitialStyles = () => {
+                 checkboxes.forEach(checkbox => {
+                    if(checkbox.checked) {
+                        const label = checkbox.nextElementSibling;
+                        const checkmark = label.querySelector('span');
+                        const svg = checkmark.querySelector('svg');
+                        checkmark.classList.add('bg-blue-600', 'border-blue-600');
+                        if (svg) svg.classList.remove('hidden');
+                    }
+                });
+            };
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const label = checkbox.nextElementSibling;
+                    const checkmark = label.querySelector('span');
+                    const svg = checkmark.querySelector('svg');
+                    if (checkbox.checked) {
+                        checkmark.classList.add('bg-blue-600', 'border-blue-600');
+                        if (svg) svg.classList.remove('hidden');
+                    } else {
+                        checkmark.classList.remove('bg-blue-600', 'border-blue-600');
+                        if (svg) svg.classList.add('hidden');
+                    }
+                    updateProgress();
+                });
+            });
+
+            const detailToggles = document.querySelectorAll('.details-toggle');
+            detailToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.parentElement.nextElementSibling;
+                    content.classList.toggle('open');
+                    toggle.textContent = content.classList.contains('open') ? 'Hide' : 'Cues';
+                });
+            });
+            
+            const reportForm = document.getElementById('report-form');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const loaderContainer = document.getElementById('loader-container');
+            const aiResponseContent = document.getElementById('ai-response-content');
+            const aiResponseText = document.getElementById('ai-response-text');
+
+            reportForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const generalNotes = document.getElementById('general-notes').value;
+
+                if (!generalNotes) {
+                    aiResponseText.innerHTML = '<p>Please provide some feedback in the form to get an analysis.</p>';
+                    aiResponseContent.classList.remove('hidden');
+                    aiResponseContainer.classList.remove('hidden');
+                    loaderContainer.classList.add('hidden');
+                    return;
+                }
+
+                aiResponseContainer.classList.remove('hidden');
+                loaderContainer.classList.remove('hidden');
+                aiResponseContent.classList.add('hidden');
+
+                const prompt = `
+                    You are an expert sports coach and physical therapist. A 23-year-old male lifter has just completed an active recovery session. Here is his report:
+                    - General Notes: "${generalNotes}"
+
+                    Based on this feedback, provide a short, encouraging response confirming that recovery is part of the process and get him mentally prepared for the next training day. Format the response as a short, encouraging paragraph. The response should be in Markdown.
+                `;
+
+                try {
+                    const text = await callGemini(prompt);
+                    let html = text.replace(/\\n\\n/g, '<p>').replace(/\\n/g, '<br>');
+                    
+                    aiResponseText.innerHTML = html;
+                    loaderContainer.classList.add('hidden');
+                    aiResponseContent.classList.remove('hidden');
+                } catch (error) {
+                    aiResponseText.innerHTML = '<p>Sorry, there was an error getting feedback from the AI coach. Please try again later.</p>';
+                    loaderContainer.classList.add('hidden');
+                    aiResponseContent.classList.remove('hidden');
+                }
+            });
+
+            async function callGemini(prompt, retries = 3, delay = 1000) {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else {
+                            throw new Error("Invalid response structure from Gemini API");
+                        }
+                    } catch (error) {
+                        if (i === retries - 1) throw error;
+                        await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+                    }
+                }
+            }
+
+            loadProgress();
+            setInitialStyles();
+            updateProgress();
+        });
+    </script>
+</body>
+                                </html>                                <svg class="w-4 h-4 text-white fill-current hidden" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
                             </span>
                             <div class="flex-grow">
                                 <p class="task-text font-medium">General Warm-up</p>
@@ -420,3 +671,4 @@
     </script>
 </body>
 </html>
+
